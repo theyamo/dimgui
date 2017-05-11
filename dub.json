@@ -1,0 +1,20 @@
+{
+    "name"       : "dimgui",
+    "authors"    : [
+        "Timo Taipalus"
+    ],
+    "copyright"  : "Copyright (c) 2016 Timo Taipalus",
+    "description": "imgui wrapper for D",
+    "license"    : "MIT",
+    "targetType" : "staticLibrary",
+    "targetName" : "dimgui",
+    "targetPath" : "./build/",
+    "lflags"     : ["-Lbuild/"],
+    "libs"       : [
+        "stdc++",
+        "imgui"
+    ],
+    "preGenerateCommands": [
+        "rdmd ./tools/setup.d"
+    ]
+}
