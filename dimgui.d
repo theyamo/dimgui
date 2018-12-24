@@ -1409,8 +1409,10 @@ struct ImDrawData
     bool            Valid;
     ImDrawList**    CmdLists;
     int             CmdListsCount;
-    int             TotalVtxCount;          // For convenience, sum of all cmd_lists vtx_buffer.Size
     int             TotalIdxCount;          // For convenience, sum of all cmd_lists idx_buffer.Size
+    int             TotalVtxCount;          // For convenience, sum of all cmd_lists vtx_buffer.Size
+    ImVec2          DisplayPos;             // Upper-left position of the viewport to render (== upper-left of the orthogonal projection matrix to use)
+    ImVec2          DisplaySize;            // Size of the viewport to render (== io.DisplaySize for the main viewport) (DisplayPos + DisplaySize == lower-right of the orthogonal projection matrix to use)
 }
 
 struct ImFontConfig
@@ -1426,6 +1428,8 @@ struct ImFontConfig
     ImVec2          GlyphExtraSpacing;              // Extra spacing (in pixels) between glyphs. Only X axis is supported for now.
     ImVec2          GlyphOffset;                    // Offset all glyphs from this font input.
     const(ImWchar)* GlyphRanges;                    // Pointer to a user-provided list of Unicode range (2 value per range, values are inclusive, zero-terminated list). THE ARRAY DATA NEEDS TO PERSIST AS LONG AS THE FONT IS ALIVE.
+    float           GlyphMinAdvanceX=0f;            // Minimum AdvanceX for glyphs, set Min to align font icons, set both Min/Max to enforce mono-space font
+    float           GlyphMaxAdvanceX=float.max;     // Maximum AdvanceX for glyphs
     bool            MergeMode=false;                // Merge into previous ImFont, so you can combine multiple inputs font into one ImFont (e.g. ASCII font + icons + Japanese glyphs). You may want to use GlyphOffset.y when merge font of different heights.
     uint            RasterizerFlags=0;              // Settings for custom font rasterizer (e.g. ImGuiFreeType). Leave as zero if you aren't using one.
     float           RasterizerMultiply=1;           // Brighten (>1.0f) or darken (<1.0f) font output. Brightening small fonts may be a good workaround to make them more readable.
