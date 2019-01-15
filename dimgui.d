@@ -1659,31 +1659,31 @@ enum ImVec4[ImGuiCol_COUNT] StyleColorsDark = [
 // just a bunch of helper wrappers... mostly adapting arrays to C/C++ arrays and strings
 void PlotLines(const(char)[] label, const(float)[] values, int values_offset = 0, const(char)[] overlay_text = null, float scale_min = float.max, float scale_max = float.max, ImVec2 graph_size = ImVec2.zero, int stride = float.sizeof)
 {
-	ImGui.PlotLines(label.toStringz, values.ptr, cast(int)values.length, values_offset, overlay_text.toStringz, scale_min, scale_max, graph_size, stride);
+    ImGui.PlotLines(label.toStringz, values.ptr, cast(int)values.length, values_offset, overlay_text.toStringz, scale_min, scale_max, graph_size, stride);
 }
 void PlotHistogram(const(char)[] label, const(float)[] values, int values_offset = 0, const(char)[] overlay_text = null, float scale_min = float.max, float scale_max = float.max, ImVec2 graph_size = ImVec2.zero, int stride = float.sizeof)
 {
-	ImGui.PlotHistogram(label.toStringz, values.ptr, cast(int)values.length, values_offset, overlay_text.toStringz, scale_min, scale_max, graph_size, stride);
+    ImGui.PlotHistogram(label.toStringz, values.ptr, cast(int)values.length, values_offset, overlay_text.toStringz, scale_min, scale_max, graph_size, stride);
 }
 
 bool Selectable(const(char)[] label, bool selected = false, ImGuiSelectableFlags flags = 0, ref const ImVec2 size = ImVec2.zero)
 {
-	return ImGui.Selectable(label.toStringz, selected, flags, size);
+    return ImGui.Selectable(label.toStringz, selected, flags, size);
 }
 bool Selectable(const(char)[] label, bool* p_selected, ImGuiSelectableFlags flags = 0, ref const ImVec2 size = ImVec2.zero)
 {
-	return ImGui.Selectable(label.toStringz, p_selected, flags, size);
+    return ImGui.Selectable(label.toStringz, p_selected, flags, size);
 }
 
 bool Combo(const(char)[] label, int* current_item, string[] items, int height_in_items = -1)
 {
-	extern (C++) static bool getItem(void* data, int item, const(char)** output)
-	{
-		string[]* items = cast(string[]*)data;
-		if (item >= (*items).length)
-			return false;
-		*output = (*items)[item].toStringz;
-		return true;
-	}
-	return ImGui.Combo(label.toStringz, current_item, &getItem, cast(void*)&items, cast(int)items.length, height_in_items);
+    extern (C++) static bool getItem(void* data, int item, const(char)** output)
+    {
+        string[]* items = cast(string[]*)data;
+        if (item >= (*items).length)
+            return false;
+        *output = (*items)[item].toStringz;
+        return true;
+    }
+    return ImGui.Combo(label.toStringz, current_item, &getItem, cast(void*)&items, cast(int)items.length, height_in_items);
 }
